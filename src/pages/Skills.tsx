@@ -245,36 +245,79 @@ const Skills: React.FC = () => {
     return currentYear - yearStarted;
   };
 
+  // Map of exact skills to job technologies - computed once
+  const skillToJobTechMap = useMemo(() => {
+    const map = new Map<string, string[]>();
+    
+    // Define skill-to-tech mappings based on our data
+    map.set('powershell', ['PowerShell']);
+    map.set('python', ['Python', 'Flask']);
+    map.set('flask', ['Flask', 'Python']);
+    map.set('csharp', ['C#']);
+    map.set('aws', ['AWS']);
+    map.set('azure', ['Microsoft Azure', 'Azure', 'Azure App Services', 'Azure Functions', 'Azure PaaS']);
+    map.set('terraform', ['Terraform', 'Infrastructure as Code']);
+    map.set('bicep', ['Bicep']);
+    map.set('jira', []);
+    map.set('ai-wrappers', []);
+    map.set('jenkins', ['Jenkins', 'CI/CD Pipelines']);
+    map.set('ansible', ['Ansible']);
+    map.set('bash', ['Bash']);
+    map.set('git', ['Git']);
+    map.set('certificate-management', ['Certificate Management']);
+    map.set('vmware', ['VMWare']);
+    map.set('linux', ['Linux']);
+    map.set('windows-server', ['Windows Server']);
+    map.set('active-directory', ['Active Directory', 'Entra ID']);
+    map.set('devops', ['DevOps']);
+    
+    return map;
+  }, []);
+
   const getRelatedJobs = (skillId: string, skillName: string) => {
-    // Find jobs that use this skill or related technologies
+    // First try exact mappings from our map
+    const exactMappings = skillToJobTechMap.get(skillId);
+    
+    if (exactMappings && exactMappings.length > 0) {
+      return jobs.filter(job => 
+        job.technologies.some(tech => 
+          exactMappings.includes(tech)
+        )
+      );
+    }
+    
+    // Fall back to exact name matches only
     return jobs.filter(job => 
       job.technologies.some(tech => 
-        tech.toLowerCase() === skillName.toLowerCase() ||
-        tech.toLowerCase().includes(skillId.toLowerCase()) ||
-        skillId.toLowerCase().includes(tech.toLowerCase())
+        tech.toLowerCase() === skillName.toLowerCase()
       )
     );
   };
 
   const handleRelatedSkillClick = (skillTag: string) => {
-    // Check if this skill tag matches any job technologies
+    // Look for exact matches with job technologies
     const matchingTechnology = allJobTechnologies.find(tech => 
-      tech.toLowerCase() === skillTag.toLowerCase() ||
-      tech.toLowerCase().includes(skillTag.toLowerCase()) ||
-      skillTag.toLowerCase().includes(tech.toLowerCase())
+      tech.toLowerCase() === skillTag.toLowerCase()
     );
-
+    
     if (matchingTechnology) {
       navigate(`/experiences?tech=${encodeURIComponent(matchingTechnology)}`);
     }
   };
 
-  const navigateToExperiences = (skillName: string) => {
-    // Find the closest matching technology in jobs
+  const navigateToExperiences = (skillName: string, skillId: string) => {
+    // First try exact mappings from our map
+    const exactMappings = skillToJobTechMap.get(skillId);
+    
+    if (exactMappings && exactMappings.length > 0) {
+      // Use the first mapping in our list
+      navigate(`/experiences?tech=${encodeURIComponent(exactMappings[0])}`);
+      return;
+    }
+    
+    // Fall back to direct name match
     const matchingTechnology = allJobTechnologies.find(tech => 
-      tech.toLowerCase() === skillName.toLowerCase() ||
-      tech.toLowerCase().includes(skillName.toLowerCase()) ||
-      skillName.toLowerCase().includes(tech.toLowerCase())
+      tech.toLowerCase() === skillName.toLowerCase()
     );
 
     if (matchingTechnology) {
@@ -326,11 +369,9 @@ const Skills: React.FC = () => {
                   {skill.relatedSkills && skill.relatedSkills.length > 0 && (
                     <RelatedSkillsContainer>
                       {skill.relatedSkills.map(relatedSkill => {
-                        // Check if this related skill has matching job technologies
+                        // Only make clickable if this is a direct match to a job technology
                         const isClickable = allJobTechnologies.some(tech => 
-                          tech.toLowerCase() === relatedSkill.toLowerCase() ||
-                          tech.toLowerCase().includes(relatedSkill.toLowerCase()) ||
-                          relatedSkill.toLowerCase().includes(tech.toLowerCase())
+                          tech.toLowerCase() === relatedSkill.toLowerCase()
                         );
                         
                         return (
@@ -349,7 +390,7 @@ const Skills: React.FC = () => {
                   {hasRelatedJobs && (
                     <JobsSection>
                       <JobsLabel>Used in {relatedJobs.length} job{relatedJobs.length !== 1 ? 's' : ''}</JobsLabel>
-                      <ViewExperiencesButton onClick={() => navigateToExperiences(skill.name)}>
+                      <ViewExperiencesButton onClick={() => navigateToExperiences(skill.name, skill.id)}>
                         View Experiences
                       </ViewExperiencesButton>
                     </JobsSection>
