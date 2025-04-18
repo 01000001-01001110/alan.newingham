@@ -22,7 +22,7 @@ A modern, responsive portfolio website showcasing my professional experience, sk
 - **Routing**: React Router v6
 - **Animations**: Framer Motion
 - **Code Quality**: ESLint, Prettier
-- **Build Tool**: Vite
+- **Build Tool**: Create React App
 
 ## Project Structure
 
@@ -63,8 +63,8 @@ react-portfolio/
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/your-username/portfolio.git
-   cd portfolio
+   git clone https://github.com/01000001-01001110/Resume-Site.git
+   cd Resume-Site
    ```
 
 2. Install dependencies
@@ -162,6 +162,6 @@ MIT License
 
 Alan Newingham - [alan.newingham@gmail.com](mailto:alan.newingham@gmail.com)
 
-Portfolio: [https://your-portfolio-url.com](https://your-portfolio-url.com)  
+Portfolio: [https://01000001-01001110.github.io/Resume-Site/](https://01000001-01001110.github.io/Resume-Site/)  
 LinkedIn: [https://www.linkedin.com/in/alan-newingham](https://www.linkedin.com/in/alan-newingham)  
 GitHub: [https://github.com/01000001-01001110](https://github.com/01000001-01001110)
