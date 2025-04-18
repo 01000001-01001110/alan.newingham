@@ -169,7 +169,7 @@ const Experiences: React.FC = () => {
     if (techFromUrl !== selectedTechnology) {
       setSelectedTechnology(techFromUrl);
     }
-  }, [techFromUrl]);
+  }, [techFromUrl, selectedTechnology]);
   
   // Extract all unique technologies from all jobs
   const technologies = useMemo(() => {

@@ -78,57 +78,12 @@ const PersonalInfoLink = styled.a`
   }
 `;
 
-const ProjectList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const ProjectItem = styled.li`
-  margin-bottom: ${props => props.theme.space.sm};
-`;
-
 const Summary = styled.p`
   font-size: ${props => props.theme.fontSizes.md};
   line-height: ${props => props.theme.lineHeights.loose};
   color: ${props => props.theme.colors.textSecondary};
   margin-bottom: ${props => props.theme.space.lg};
   text-align: justify;
-`;
-
-const SkillsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: ${props => props.theme.space.md};
-`;
-
-const SkillCategory = styled.div`
-  margin-bottom: ${props => props.theme.space.md};
-`;
-
-const SkillSubtitle = styled.h4`
-  font-size: ${props => props.theme.fontSizes.lg};
-  color: ${props => props.theme.colors.lightBlue};
-  margin-bottom: ${props => props.theme.space.sm};
-`;
-
-const SkillItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: ${props => props.theme.space.xs};
-  align-items: center;
-`;
-
-const SkillName = styled.span`
-  color: ${props => props.theme.colors.textSecondary};
-`;
-
-const SkillLevel = styled.span`
-  color: ${props => props.theme.colors.lightestBlue};
-  font-size: ${props => props.theme.fontSizes.sm};
-  background-color: ${props => props.theme.colors.darkestBlue};
-  padding: ${props => `${props.theme.space.xs} ${props.theme.space.sm}`};
-  border-radius: ${props => props.theme.radii.md};
 `;
 
 const ExperienceContainer = styled.div`
