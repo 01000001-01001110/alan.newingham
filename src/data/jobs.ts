@@ -9,20 +9,14 @@ export const jobs: Job[] = [
     endDate: 'Present',
     location: 'Remote',
     responsibilities: [
-      'Assess on-premises IT environments and identify strategic cloud migration opportunities.',
-      'Develop comprehensive migration strategies that align with business goals.',
-      'Design scalable and resilient cloud architecture solutions.',
-      'Implement infrastructure-as-code methodologies using Terraform and Bicep.',
-      'Utilize CI/CD pipelines and DevOps practices to automate deployment, testing, and validation processes.',
-      'Configure and continuously optimize cloud resources for maximum cost efficiency.',
-      'Establish robust security protocols and compliance measures for cloud environments that address industry regulations and organizational security policies.',
-      'Coordinate effectively with diverse stakeholders throughout migration processes.',
-      'Identify potential technical risks associated with cloud migrations and develop comprehensive mitigation strategies to ensure successful transitions.',
-      'Provide detailed documentation and comprehensive knowledge transfer sessions for client teams responsible.',
-      'Develop sophisticated automation solutions for ongoing cloud management that reduce manual intervention.',
-      'Conduct in-depth training sessions for client teams on cloud technologies, best practices, and management procedures to build internal capabilities.',
-      'Monitor and optimize cloud performance post-migration using advanced analytics and performance metrics to ensure optimal resource utilization.',
-      'Document lessons learned and best practices from each migration project to continuously improve methodologies for future cloud transformations.',
+      'Lead and execute the migration of on-premises infrastructure and applications to the cloud',
+      'Assess current state of organizations\' IT environments and identify migration opportunities',
+      'Develop comprehensive migration plans with minimal to zero downtime',
+      'Implement necessary changes to infrastructure, applications, and organizational processes',
+      'Coordinate with stakeholders including IT teams, business units, and vendors',
+      'Identify and mitigate migration risks associated with cloud migration',
+      'Manage and monitor migration processes to ensure successful completion',
+      'Provide guidance and best practices for ongoing cloud management and optimization'
     ],
     technologies: [
       'Azure', 'AWS', 'Infrastructure as Code', 'Terraform', 'Bicep', 
@@ -30,16 +24,10 @@ export const jobs: Job[] = [
       'CI/CD', 'DevOps', 'Lift and Shift'
     ],
     achievements: [
-      'Successfully migrated 8 mid-sized organizations to cloud platforms with zero downtime, using comprehensive pre-flight assessments and meticulously planned migration windows',
-      'Reduced infrastructure costs by an average of 37% through strategic resource optimization and implementation of auto-scaling policies',
-      'Developed reusable IaC templates that accelerated migration timelines by 60% for subsequent projects while ensuring consistent deployments',
-      'Implemented cloud-native disaster recovery solutions for a financial services client, reducing recovery time from 24+ hours to under 45 minutes',
-      'Created automated DevOps pipelines that decreased deployment time by 78% and virtually eliminated configuration errors',
-      'Designed hybrid cloud architecture for a healthcare provider that maintained HIPAA compliance while enabling phased migration of sensitive patient data',
-      'Established comprehensive cloud governance frameworks with automated compliance checking for multiple regulatory standards including SOC2, PCI-DSS, and GDPR',
-      'Implemented cost optimization strategies that identified and eliminated $350,000 in annual cloud waste across multiple client environments',
-      'Designed and delivered customized cloud training programs that reduced post-migration support tickets by 65% through improved internal capabilities',
-      'Created automated monitoring systems with predictive alerting that prevented five potential major outages by identifying resource constraints before they affected production'
+      'Successfully migrated multiple organizations to cloud platforms with zero downtime',
+      'Reduced infrastructure costs by an average of 30% through cloud optimization',
+      'Implemented scalable cloud solutions that improved performance and reliability',
+      'Established best practices for ongoing cloud management'
     ],
     notes: 'Specializing in Lift and Shift Solutions for Organizations'
   },
@@ -51,20 +39,13 @@ export const jobs: Job[] = [
     endDate: 'Present',
     location: 'Remote, Florida',
     responsibilities: [
-      'Design and implement infrastructure-as-code solutions for payment gateway and business units',
-      'Develop and maintain security protocols for data protection and access management',
-      'Lead certificate management processes for business-critical payment services',
-      'Build and optimize CI/CD pipelines and automated testing frameworks',
-      'Serve as scrum master facilitating team meetings and sprint planning',
-      'Create and maintain internal development tools and utilities',
-      'Collaborate with cross-functional teams to deliver technical solutions',
-      'Provide technical documentation and knowledge transfer sessions',
-      'Support troubleshooting and incident response across platforms',
-      'Develop automation solutions to improve operational efficiency',
-      'Implement standardized development environments and practices',
-      'Architect secure connectivity between enterprise business systems',
-      'Lead Initial HSM implementation project for our payments terminal project',
-      'Develop and maintain internal tools for team efficiency',
+      'Architected and deployed infrastructure-as-code solutions using Terraform and Bicep for payments gateway and multiple business units',
+      'Implemented and maintained Microsoft 365 ecosystem across the organization with 1,700+ employees',
+      'Designed and implemented security measures including data protection, identity management, and access controls',
+      'Created automated certificate scanning, reporting, and incident creation system that significantly improved security posture',
+      'Developed QA Jenkins pipeline that transformed manual testing into automated processes with more reliable results',
+      'Served as scrum master for the team, leading meetings and improving delivery velocity through streamlined processes',
+      'Implemented comprehensive certificate management and renewal process for payment services (Visa and Apple Pay)'
     ],
     technologies: [
       'Microsoft Azure', 'Microsoft 365', 'Entra ID', 'Exchange Online', 
@@ -74,25 +55,20 @@ export const jobs: Job[] = [
       'WAF', 'DevOps', 'Git', 'Jenkins', 'CI/CD Pipelines',
       'Python', 'Flask', 'PowerShell', 'Bash', 'C#', 'Azure Functions',
       'API Management', 'RESTful APIs', 'Certificate Management', 
-      'Identity & Access Management', 'SSO', 'MFA', 'Ansible',
-      'Dev Containers', 'Docker', 'Automated Testing', 'Process Automation'
+      'Identity & Access Management', 'SSO', 'MFA', 'Ansible'
     ],
     achievements: [
-      'Implemented comprehensive security frameworks adhering to NIST CSF and PCI DSS requirements, significantly enhancing organizational security posture',
-      'Created automated deployment playbooks that reduced implementation time by 60% while improving deployment consistency and reliability',
-      'Developed suite of engineering tools that improved team productivity by 30% through streamlined workflows and reduced manual intervention',
-      'Engineered C# function app with automated certificate synchronization between key vaults, ensuring consistent security configuration across environments',
-      'Designed and implemented role-based Identity and Access Management solutions that greatly enhanced security while maintaining operational efficiency',
-      'Built certificate management automation system that reduced manual certificate handling by 80% and prevented potential service disruptions',
-      'Created automated certificate scanning and incident creation system following a critical security event, substantially improving detection and response times',
-      'Developed QA Jenkins pipeline that transformed manual testing into automated processes with more reliable results and reduced QA team workload',
-      'Received Outstanding Performance rating for critical thinking and continuous development in annual performance review',
-      'Proactively stepped out of comfort zone to serve as scrum master, leading meetings and improving team delivery velocity',
-      'Created Platform Tools beta Python project providing rapid access to crucial information, enhancing troubleshooting efficiency',
-      'Lead the development of internal AI tools to enhance team productivity and streamline processes',
-      'Implemented a comprehensive certificate management system that automated the renewal and deployment of apple pay payments certificates, reducing manual effort by 90%',
-      'Provided guidance and support for new team members, improving onboarding efficiency and team cohesion'
-    ]
+      'Implemented security frameworks adhering to NIST CSF and PCI DSS requirements',
+      'Created automated deployment playbooks that reduced implementation time by 60%',
+      'Developed multiple engineering tools that improved team productivity by 30%',
+      'Created a C# function app that automatically copies certificate versions between key vaults',
+      'Designed role-based Identity and Access Management solutions improving security posture',
+      'Implemented certificate management automation that reduced manual certificate handling by 80%',
+      'Established seamless connectivity between multiple enterprise business systems',
+      'Developed a Platform Tools beta Python project providing quick access to crucial information',
+      'Received Outstanding Performance rating for critical thinking and continuous development'
+    ],
+    notes: 'Key contributor to the Platform Engineering team'
   },
   {
     id: 'sanford-airport',
@@ -102,18 +78,19 @@ export const jobs: Job[] = [
     endDate: '2022-08',
     location: 'Sanford, FL',
     responsibilities: [
-      'Oversee security and stability of all airport IT systems in compliance with FAA, TSA, and airport certification requirements',
-      'Serve as Information Systems Security Officer, managing access controls and security monitoring',
-      'Administer firewall systems including Cisco ASA and SonicWall appliances',
-      'Maintain and troubleshoot Windows Server and Linux environments',
-      'Manage VMware virtualization infrastructure',
-      'Implement and maintain containerized applications using Docker and Docker Swarm',
-      'Develop automation solutions using PowerShell for system management and reporting',
-      'Conduct regular patching and updates across all systems and network infrastructure',
-      'Create and maintain security documentation and compliance reporting',
-      'Design and implement authentication systems including MFA/2FA solutions',
-      'Provide technical support and troubleshooting for airport-wide computer systems',
-      'Develop and maintain test environments for patch validation and system upgrades'
+      "When I started at Sanford Airport Authority, my main focus was ensuring the security and stability of all IT systems while adhering to strict FAA, TSA, and airport certification requirements. I basically became the airport's tech guardian—watching over everything from surveillance systems to network infrastructure.",
+      
+      "One of my first big wins was fixing a Cisco ASA firewall that had been constantly restarting. The issue had been frustrating the team for weeks, but I managed to diagnose and fix it within my first week. That firewall went on to have over a year of uninterrupted uptime, which felt pretty satisfying.",
+      
+      "As the Information Systems Security Officer, my days were filled with monitoring security systems, maintaining access controls, and ensuring all our processes met regulatory requirements. I created daily reports that tracked failed logins, lockouts, and successful logins—this helped us spot potential security issues before they became problems.",
+      
+      "I really enjoyed implementing Docker at the airport. We set up a Docker server hosting Grafana for visualizing data, MongoDB for databases, and BitWarden for secure password management. Later, we expanded this into a Docker Swarm, which made our applications much more resilient and easier to manage.",
+      
+      "Patching was a big part of my role—I handled updates for Windows Servers (2012r2 through 2022), Linux systems, VMware environments, and network appliances like SonicWall and Cisco devices. To make this safer, I built a test environment where we could verify patches before deploying them to production systems.",
+      
+      "One of my favorite projects was implementing a Local Administrator Password Solution (LAPS) with its own web portal running in Docker. This dramatically improved our security posture by automatically managing and rotating local admin passwords across all machines.",
+      
+      "I also loved automating repetitive tasks. I created PowerShell scripts for system inventory gathering, streamlined the new hire process, and built automation that would report on domain health weekly. My proudest automation was probably the GUI application I built for remotely managing and troubleshooting computers across the airport—it saved us countless trips across the terminal."
     ],
     technologies: [
       'VMWare', 'SonicWall', 'Cisco ASA', 'Linux', 'Windows Server',
@@ -124,18 +101,25 @@ export const jobs: Job[] = [
       'SD-WAN', 'OpenVPN'
     ],
     achievements: [
-      "Resolved chronic Cisco ASA firewall issue within first week that had been causing regular outages, resulting in over a year of continuous uptime",
-      "Established comprehensive Docker environment that evolved into Docker Swarm, hosting critical applications like Grafana, MongoDB, and BitWarden",
-      "Implemented LAPS (Local Administrator Password Solution) with custom web portal, significantly enhancing security by automating credential management",
-      "Designed and deployed robust MFA/2FA authentication system for critical airport systems, protecting sensitive operations and data",
-      "Created suite of PowerShell automation tools including system inventory collection, new hire processing, and domain health reporting",
-      "Built custom GUI application for remote troubleshooting of computers throughout the airport, dramatically reducing response time for IT issues",
-      "Collaborated with HR to modernize employee onboarding process using Microsoft Forms and Power Automate, reducing processing time from 2+ hours to under 7 minutes",
-      "Maintained 99.9% uptime for critical airport infrastructure including security, communication, and operations systems",
-      "Successfully managed VMware environment upgrade from 6.0 U2 to 6.7, including vSphere server and three hypervisors, with minimal service disruption",
-      "Implemented comprehensive security monitoring with daily reports tracking authentication events to identify potential security incidents",
-      "Developed and deployed test environment for validating patches before production implementation, reducing system downtime risk"
+      "Fixed a chronic Cisco ASA firewall issue within my first week that had been causing regular outages, resulting in over a year of continuous uptime afterward.",
+      
+      "Established a comprehensive Docker environment that evolved into a Docker Swarm, hosting critical applications like Grafana, MongoDB, and BitWarden that improved system visibility and security.",
+      
+      "Implemented LAPS (Local Administrator Password Solution) with a custom web portal, significantly enhancing the airport's security posture by automatically managing local administrator credentials.",
+      
+      "Designed and deployed a robust MFA/2FA authentication system for critical airport systems, protecting sensitive operations and data.",
+      
+      "Created a suite of PowerShell automation tools including system inventory collection, new hire processing, and domain health reporting that saved hours of manual work each week.",
+      
+      "Built a custom GUI application that allowed remote troubleshooting and management of computers throughout the airport facilities, dramatically reducing response time for IT issues.",
+      
+      "Collaborated with HR to modernize the employee onboarding process using Microsoft Forms and Power Automate, reducing processing time from over 2 hours to just under 7 minutes.",
+      
+      "Maintained 99.9% uptime for critical airport infrastructure including all security, communication, and operations systems.",
+      
+      "Successfully managed the upgrade of the VMware environment from 6.0 U2 to 6.7, including the vSphere server and three hypervisors, with minimal service disruption."
     ],
+    notes: 'Responsible for security and compliance with FAA, TSA, and airport certification requirements'
   },
   {
     id: 'embry-riddle',
@@ -145,16 +129,19 @@ export const jobs: Job[] = [
     endDate: '2020-07',
     location: 'Daytona Beach, Florida',
     responsibilities: [
-      'Provide technical support across diverse platforms including Windows, macOS, and multiple Linux distributions',
-      'Create automation solutions using PowerShell, Bash, AppleScript, and other scripting languages',
-      'Develop custom applications using C# to address process inefficiencies',
-      'Implement and maintain backup systems for user profiles and critical data',
-      'Deploy and secure specialized hardware solutions including Raspberry Pi devices',
-      'Conduct hardware upgrades and software installations across campus computing resources',
-      'Support COVID-19 response initiatives through technology deployment',
-      'Configure and troubleshoot systems to meet IT security standards',
-      'Share technical knowledge through documentation and knowledge base contributions',
-      'Manage 2FA implementation and security protocols'
+      "My time at Embry-Riddle was incredibly fulfilling and allowed me to blend technical problem-solving with larger-scale project leadership. I became known as the automation guy—if there was a repetitive task causing headaches, I'd find a way to script it.",
+      
+      "Over the course of my two and a half years there, I built up a massive library of 777 scripts across multiple platforms (PowerShell, Bash, DOS, AppleScript) and developed more than 10 C# applications. These weren't just small utilities—they addressed serious process inconsistencies across the university.",
+      
+      "One of my favorite creations was the PowerShell Profile Backup Script. What started as a simple backup tool evolved into a comprehensive solution that could handle 30+ data directories, automatically manage applications during the backup process, verify file integrity, and provide detailed logging. It transformed a two-page manual process into a streamlined operation that saved countless hours and prevented data loss incidents.",
+      
+      "I really enjoyed leading the Raspbian Project, where we deployed Atrium software on 10 Raspberry Pi devices across campus. The challenge was making these consumer devices comply with our IT security standards, so I wrote a custom 'hardening' script that locked them down while still keeping them functional for their intended purpose.",
+      
+      "The Summer Refresh of 2018 was probably my most intense project. I was handed a list of over 500 computers that needed hardware upgrades (replacing HDDs with SSDs) and complete software reinstallation. With just a small team of three people including myself, we managed to complete this enormous undertaking in just eight days—a timeline that initially seemed impossible.",
+      
+      "When COVID-19 hit, my experience with the Raspberry Pi devices proved invaluable. We quickly pivoted to create 74 wellness check stations across campus. I updated our Raspbian image and created a new hardening script in under four hours from the moment we got the project brief. The entire deployment—all 74 stations—was completed in just two working days.",
+      
+      "Throughout my time at Embry-Riddle, I supported an incredibly diverse technology landscape. On any given day, I might troubleshoot issues on Windows, macOS, or various Linux distributions like Ubuntu, RedHat, and Raspbian. This broad exposure kept me constantly learning and adapting."
     ],
     technologies: [
       'PowerShell', 'C#', 'Bash', 'AppleScript', 'DOS', 'Windows 7/10',
@@ -164,15 +151,21 @@ export const jobs: Job[] = [
       'IT Support', 'Hardware Troubleshooting'
     ],
     achievements: [
-      "Created 'The Library'—a collection of 777 scripts across multiple platforms (PowerShell, Bash, DOS, AppleScript) and over 10 C# applications that solved numerous process inefficiencies",
-      "Developed comprehensive PowerShell Profile Backup Script handling 30+ directories with automated application management, integrity verification, and detailed logging capabilities",
-      "Led Summer Refresh 2018 project, upgrading over 500 computers with SSDs and software reinstallation in just eight days with a three-person team",
-      "Spearheaded COVID-19 Wellness Check Project, creating and deploying 74 wellness check stations across campus in two working days",
-      "Created custom Raspbian image and hardening script in under four hours from project inception",
-      "Began development on IoT solution using Amazon 1-Touch buttons and Lambda functions for instant classroom technology failure alerts",
-      "Established IT Blog in Delve sharing technical insights, command explanations, and best practices",
-      "Successfully managed university's Duo 2FA implementation, ensuring secure access while maintaining usability"
-    ]
+      "Created what became known as 'The Library'—a collection of 777 scripts across multiple platforms (PowerShell, Bash, DOS, AppleScript) and over 10 C# applications that solved numerous process inefficiencies across the university.",
+      
+      "Developed a comprehensive PowerShell Profile Backup Script that revolutionized the university's backup process, handling 30+ directories, providing automated application management, integrity verification, and detailed logging capabilities. Check it out at github.com/01000001-01001110/PowershellProfileBackup",
+      
+      "Led the Summer Refresh 2018 project, where my team of just three people successfully upgraded over 500 computers (replacing HDDs with SSDs and reinstalling all software) in a mere eight days, far exceeding expected timelines.",
+      
+      "Spearheaded the COVID-19 Wellness Check Project, creating and deploying 74 wellness check stations across campus in just two working days, crafting a custom Raspbian image and hardening script in under four hours from project inception.",
+      
+      "Conceptualized and began development on an IoT solution using Amazon 1-Touch buttons and Lambda functions to provide instant alerts when classroom technology failed, improving response times and reducing class disruptions.",
+      
+      "Established myself as a Knowledge Engineer by creating and maintaining an IT Blog in Delve that shared technical insights, command explanations, and best practices, significantly increasing knowledge sharing across teams.",
+      
+      "Successfully managed the university's Duo 2FA implementation, ensuring secure access to critical systems while maintaining ease of use for students, faculty, and staff."
+    ],
+    notes: 'Created 777 scripts and 10+ C# applications to solve university process inefficiencies'
   },
   {
     id: 'adventist-health',
@@ -182,16 +175,17 @@ export const jobs: Job[] = [
     endDate: '2017-11',
     location: 'DeLand, FL',
     responsibilities: [
-      'Lead and manage two four-person technical teams across two hospital locations',
-      'Oversee daily operations including ticket review, triage, and assignment',
-      'Provide technical support for complex healthcare IT systems',
-      'Develop and implement inventory management solutions',
-      'Lead technology deployment for hospital expansions and new facilities',
-      'Participate in annual budget planning and forecasting for IT expenditures',
-      'Conduct performance evaluations and professional development for team members',
-      'Improve technical support processes and customer service procedures',
-      'Collaborate with hospital administrators and department heads on IT initiatives',
-      'Ensure compliance with healthcare IT regulations and security requirements'
+      "My seven years at Adventist Health Systems were transformative, as I grew from a Tier 2 Tech into a Lead Technician, skipping the Senior Technician role entirely due to my performance. I found myself responsible for two four-person teams across two separate hospitals (DeLand and Orange City), handling everything from day-to-day troubleshooting to larger strategic planning.",
+      
+      "A typical day might start with reviewing the previous night's tickets and triaging any urgent matters among my team members. I'd check in with each technician to make sure they had what they needed to succeed that day. Throughout the day, I would balance my own technical responsibilities with leadership duties—jumping in to help with complex problems while also handling management tasks like scheduling, evaluations, and process improvements.",
+      
+      "One of my earliest wins was identifying a major gap in our inventory management. We were wasting significant time and resources due to poor tracking, so I designed and implemented a new inventory system that proved so effective it was adopted organization-wide. This involved not just the technical solution but also training staff and creating new workflows that everyone could follow easily.",
+      
+      "I got to lead some exciting large-scale projects, including hospital expansions and new building openings. These were complex undertakings where we'd need to coordinate many moving parts—from network infrastructure to workstation deployment to application access—often under tight deadlines as opening dates approached.",
+      
+      "The budget planning process was always an interesting challenge. Each year, I'd help forecast a $3.5 million budget for each hospital, analyzing trends, planning for hardware refreshes, accounting for software licensing, and anticipating growth needs. This required close collaboration with hospital administrators and finance teams to make the case for necessary investments.",
+      
+      "What I'm perhaps most proud of is how we transformed the customer satisfaction metrics. When I started, our customer satisfaction rate on the CEO survey was at 67%—not terrible, but certainly not where we wanted to be. Through focused improvements in processes, response times, and especially face-to-face interactions with hospital staff, we steadily raised that number until we consistently achieved 99% satisfaction rates year after year."
     ],
     technologies: [
       'Windows', 'Active Directory', 'Healthcare IT Systems',
@@ -199,13 +193,19 @@ export const jobs: Job[] = [
       'Team Leadership', 'Electronic Medical Records'
     ],
     achievements: [
-      "Advanced from Tier 2 Tech directly to Lead Technician, skipping Senior Technician level due to exceptional performance",
-      "Transformed customer satisfaction ratings from 67% to 99% on CEO's organizational survey through improved processes and engagement",
-      "Created and implemented inventory management system adopted throughout the entire Adventist Health organization",
-      "Successfully managed technical teams across separate hospital locations while balancing hands-on work with leadership responsibilities",
-      "Led multiple hospital expansion projects ensuring seamless technology deployment under tight deadlines",
-      "Contributed to annual budget planning for $3.5 million technology expenditures per hospital with accurate forecasting models",
-      "Established standardized processes for training, onboarding, and knowledge transfer improving team performance across locations"
+      "Made a dramatic career advancement by being promoted directly from Tier 2 Tech to Lead Technician, skipping the Senior Technician level entirely—a very rare occurrence that recognized exceptional performance and leadership potential.",
+      
+      "Transformed customer satisfaction ratings from a mediocre 67% to an outstanding 99% on the CEO's organizational survey through improved processes, better communication, and more direct engagement with hospital staff.",
+      
+      "Created and implemented an inventory management system that was so effective it was adopted throughout the entire Adventist Health organization, significantly reducing waste and improving resource allocation.",
+      
+      "Successfully managed and mentored two four-person technical teams across separate hospital locations (DeLand and Orange City), balancing hands-on technical work with leadership responsibilities.",
+      
+      "Led multiple hospital expansion projects and new building integrations, ensuring seamless technology deployment from network infrastructure to end-user computing under tight deadlines.",
+      
+      "Contributed to annual budget planning for $3.5 million technology expenditures per hospital, developing forecasting models that accurately predicted growth needs and maintenance requirements.",
+      
+      "Established standardized processes for training, onboarding, and knowledge transfer that improved team performance and consistency across multiple hospital locations."
     ],
     notes: 'Promoted from Tier 2 Tech, skipping Senior Technician position'
   }
