@@ -49,7 +49,7 @@ export const jobs: Job[] = [
     company: 'Fullsteam LLC',
     startDate: '2022-09',
     endDate: 'Present',
-    location: 'Remote, Florida',
+    location: 'Remote, Alabama',
     responsibilities: [
       'Design and implement infrastructure-as-code solutions for payment gateway and business units',
       'Develop and maintain security protocols for data protection and access management',
