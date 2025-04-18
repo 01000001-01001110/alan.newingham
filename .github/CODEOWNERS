@@ -1,0 +1,26 @@
+# CODEOWNERS file for Alan's Portfolio Site
+
+# Default owners for everything in the repo
+# These owners will be the default owners for everything in
+# the repo unless a later match takes precedence
+* @01000001-01001110
+
+# Owners for specific paths
+# You can add more specific ownership rules below
+
+# Example: Frontend components owned by specific user
+# /src/components/ @frontend-specialist
+
+# Example: Backend API owned by another user
+# /api/ @backend-specialist
+
+# Documentation owned by documentation team
+# /docs/ @documentation-team
+
+# Critical configuration files
+.github/workflows/* @01000001-01001110
+package.json @01000001-01001110
+tsconfig.json @01000001-01001110
+
+# Resume data files (Content)
+/src/data/* @01000001-01001110
