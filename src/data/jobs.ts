@@ -9,20 +9,20 @@ export const jobs: Job[] = [
     endDate: 'Present',
     location: 'Remote',
     responsibilities: [
-      'Assess on-premises IT environments and identify strategic cloud migration opportunities.',
-      'Develop comprehensive migration strategies that align with business goals.',
-      'Design scalable and resilient cloud architecture solutions.',
-      'Implement infrastructure-as-code methodologies using Terraform and Bicep.',
-      'Utilize CI/CD pipelines and DevOps practices to automate deployment, testing, and validation processes.',
-      'Configure and continuously optimize cloud resources for maximum cost efficiency.',
+      'Assess on-premises IT environments and identify strategic cloud migration opportunities while considering business objectives and technical constraints.',
+      'Develop comprehensive migration strategies that align with business goals while ensuring minimal disruption to ongoing operations and existing workflows.',
+      'Design scalable and resilient cloud architecture solutions specifically tailored to meet unique organizational needs and future growth requirements.',
+      'Implement infrastructure-as-code methodologies using Terraform and Bicep to enable consistent deployments, version control, and simplified management.',
+      'Utilize CI/CD pipelines and DevOps practices to automate deployment, testing, and validation processes across cloud migration projects.',
+      'Configure and continuously optimize cloud resources for maximum cost efficiency while maintaining necessary performance and reliability standards.',
       'Establish robust security protocols and compliance measures for cloud environments that address industry regulations and organizational security policies.',
-      'Coordinate effectively with diverse stakeholders throughout migration processes.',
+      'Coordinate effectively with diverse stakeholders throughout migration processes, including IT teams, business units, and third-party vendors.',
       'Identify potential technical risks associated with cloud migrations and develop comprehensive mitigation strategies to ensure successful transitions.',
-      'Provide detailed documentation and comprehensive knowledge transfer sessions for client teams responsible.',
-      'Develop sophisticated automation solutions for ongoing cloud management that reduce manual intervention.',
+      'Provide detailed documentation and comprehensive knowledge transfer sessions for client teams responsible for maintaining cloud systems post-migration.',
+      'Develop sophisticated automation solutions for ongoing cloud management that reduce manual intervention and improve operational efficiency.',
       'Conduct in-depth training sessions for client teams on cloud technologies, best practices, and management procedures to build internal capabilities.',
       'Monitor and optimize cloud performance post-migration using advanced analytics and performance metrics to ensure optimal resource utilization.',
-      'Document lessons learned and best practices from each migration project to continuously improve methodologies for future cloud transformations.',
+      'Document lessons learned and best practices from each migration project to continuously improve methodologies for future cloud transformations.'
     ],
     technologies: [
       'Azure', 'AWS', 'Infrastructure as Code', 'Terraform', 'Bicep', 
@@ -62,9 +62,7 @@ export const jobs: Job[] = [
       'Support troubleshooting and incident response across platforms',
       'Develop automation solutions to improve operational efficiency',
       'Implement standardized development environments and practices',
-      'Architect secure connectivity between enterprise business systems',
-      'Lead Initial HSM implementation project for our payments terminal project',
-      'Develop and maintain internal tools for team efficiency',
+      'Architect secure connectivity between enterprise business systems'
     ],
     technologies: [
       'Microsoft Azure', 'Microsoft 365', 'Entra ID', 'Exchange Online', 
@@ -74,8 +72,7 @@ export const jobs: Job[] = [
       'WAF', 'DevOps', 'Git', 'Jenkins', 'CI/CD Pipelines',
       'Python', 'Flask', 'PowerShell', 'Bash', 'C#', 'Azure Functions',
       'API Management', 'RESTful APIs', 'Certificate Management', 
-      'Identity & Access Management', 'SSO', 'MFA', 'Ansible',
-      'Dev Containers', 'Docker', 'Automated Testing', 'Process Automation'
+      'Identity & Access Management', 'SSO', 'MFA', 'Ansible'
     ],
     achievements: [
       'Implemented comprehensive security frameworks adhering to NIST CSF and PCI DSS requirements, significantly enhancing organizational security posture',
@@ -86,13 +83,14 @@ export const jobs: Job[] = [
       'Built certificate management automation system that reduced manual certificate handling by 80% and prevented potential service disruptions',
       'Created automated certificate scanning and incident creation system following a critical security event, substantially improving detection and response times',
       'Developed QA Jenkins pipeline that transformed manual testing into automated processes with more reliable results and reduced QA team workload',
+      'Led development of standardized dev containers for the team, ensuring consistent development environments and reducing configuration issues',
       'Received Outstanding Performance rating for critical thinking and continuous development in annual performance review',
       'Proactively stepped out of comfort zone to serve as scrum master, leading meetings and improving team delivery velocity',
       'Created Platform Tools beta Python project providing rapid access to crucial information, enhancing troubleshooting efficiency',
-      'Lead the development of internal AI tools to enhance team productivity and streamline processes',
-      'Implemented a comprehensive certificate management system that automated the renewal and deployment of apple pay payments certificates, reducing manual effort by 90%',
+      'Took initiative to strengthen team unity and self-sufficiency during organizational transitions',
       'Provided guidance and support for new team members, improving onboarding efficiency and team cohesion'
-    ]
+    ],
+    notes: 'Key contributor to the Platform Engineering team'
   },
   {
     id: 'sanford-airport',
@@ -136,6 +134,7 @@ export const jobs: Job[] = [
       "Implemented comprehensive security monitoring with daily reports tracking authentication events to identify potential security incidents",
       "Developed and deployed test environment for validating patches before production implementation, reducing system downtime risk"
     ],
+    notes: 'Responsible for security and compliance with FAA, TSA, and airport certification requirements'
   },
   {
     id: 'embry-riddle',
@@ -172,7 +171,8 @@ export const jobs: Job[] = [
       "Began development on IoT solution using Amazon 1-Touch buttons and Lambda functions for instant classroom technology failure alerts",
       "Established IT Blog in Delve sharing technical insights, command explanations, and best practices",
       "Successfully managed university's Duo 2FA implementation, ensuring secure access while maintaining usability"
-    ]
+    ],
+    notes: 'Created 777 scripts and 10+ C# applications to solve university process inefficiencies'
   },
   {
     id: 'adventist-health',
