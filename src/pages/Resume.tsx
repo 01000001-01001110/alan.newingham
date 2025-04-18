@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import skills from '../data/skills';
 import jobs from '../data/jobs';
+import html2pdf from 'html2pdf.js';
 
 const ResumeContainer = styled.div`
   max-width: 1000px;
@@ -10,11 +11,44 @@ const ResumeContainer = styled.div`
   padding: ${props => props.theme.space.lg} ${props => props.theme.space.md};
 `;
 
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: ${props => props.theme.space.md};
+  position: relative;
+`;
+
 const Title = styled.h1`
   font-size: ${props => props.theme.fontSizes['4xl']};
   color: ${props => props.theme.colors.lightestBlue};
   margin-bottom: ${props => props.theme.space.md};
   text-align: center;
+`;
+
+const DownloadButton = styled.button`
+  position: absolute;
+  right: 0;
+  top: 10px;
+  background-color: ${props => props.theme.colors.lightBlue};
+  color: ${props => props.theme.colors.dark};
+  border: none;
+  border-radius: ${props => props.theme.radii.md};
+  padding: ${props => `${props.theme.space.sm} ${props.theme.space.md}`};
+  font-weight: ${props => props.theme.fontWeights.medium};
+  cursor: pointer;
+  transition: all ${props => props.theme.transitions.fast};
+  display: flex;
+  align-items: center;
+  gap: ${props => props.theme.space.xs};
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.accentLight};
+  }
+  
+  @media print {
+    display: none;
+  }
 `;
 
 const Subtitle = styled.h2`
@@ -162,10 +196,38 @@ const Resume: React.FC = () => {
     visible: { opacity: 1, y: 0 }
   };
   
+  const resumeRef = useRef<HTMLDivElement>(null);
+  
+  const handleDownloadPDF = () => {
+    if (!resumeRef.current) return;
+    
+    const element = resumeRef.current;
+    
+    // Set up options for PDF generation
+    const options = {
+      margin: [10, 10, 10, 10],
+      filename: 'Alan_Newingham_Resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    // Generate PDF
+    html2pdf().set(options).from(element).save();
+  };
+
   return (
-    <ResumeContainer>
-      <Title>Alan Newingham</Title>
-      <Subtitle>Platform Engineer</Subtitle>
+    <ResumeContainer ref={resumeRef}>
+      <HeaderContainer>
+        <Title>Alan Newingham</Title>
+        <Subtitle>Platform Engineer</Subtitle>
+        <DownloadButton onClick={handleDownloadPDF}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 12L3 7L4.4 5.55L7 8.15V0H9V8.15L11.6 5.55L13 7L8 12ZM0 16V11H2V14H14V11H16V16H0Z" fill="currentColor"/>
+          </svg>
+          Download PDF
+        </DownloadButton>
+      </HeaderContainer>
       
       <motion.div
         variants={containerVariants}

@@ -21,6 +21,7 @@ A modern, responsive portfolio website showcasing my professional experience, sk
 - **Styling**: Styled Components, Theme Provider
 - **Routing**: React Router v6
 - **Animations**: Framer Motion
+- **PDF Generation**: html2pdf.js
 - **Code Quality**: ESLint, Prettier
 - **Build Tool**: Create React App
 
