@@ -20,6 +20,9 @@ jobs:
       - name: Install Dependencies 📦
         run: npm ci
 
+      - name: Install html2pdf.js
+        run: npm install html2pdf.js --save
+
       - name: Build 🏗️
         run: npm run build
 
