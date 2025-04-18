@@ -208,25 +208,32 @@ const ExperienceList: React.FC<ExperienceListProps> = ({ jobs, selectedTechnolog
           <JobContent>
             <SectionTitle>Key Responsibilities</SectionTitle>
             <ResponsibilitiesList>
-              {job.responsibilities.slice(0, 3).map((responsibility, index) => (
+              {job.responsibilities.slice(0, 5).map((responsibility, index) => (
                 <li key={index}>{responsibility}</li>
               ))}
+              {job.responsibilities.length > 5 && (
+                <li key="more">And {job.responsibilities.length - 5} more responsibilities...</li>
+              )}
             </ResponsibilitiesList>
             
-            <SectionTitle>Technologies</SectionTitle>
-            <TechContainer>
-              {job.technologies.slice(0, 6).map((tech, index) => (
-                <TechTag 
-                  key={index} 
-                  $highlighted={selectedTechnology === tech}
-                >
-                  {tech}
-                </TechTag>
-              ))}
-              {job.technologies.length > 6 && (
-                <TechTag>+{job.technologies.length - 6} more</TechTag>
-              )}
-            </TechContainer>
+            {job.technologies && job.technologies.length > 0 && (
+              <>
+                <SectionTitle>Technologies</SectionTitle>
+                <TechContainer>
+                  {job.technologies.slice(0, 10).map((tech, index) => (
+                    <TechTag 
+                      key={index} 
+                      $highlighted={selectedTechnology === tech}
+                    >
+                      {tech}
+                    </TechTag>
+                  ))}
+                  {job.technologies.length > 10 && (
+                    <TechTag>+{job.technologies.length - 10} more</TechTag>
+                  )}
+                </TechContainer>
+              </>
+            )}
             
             <ViewButton to={`/experience/${job.id}`}>
               View Details

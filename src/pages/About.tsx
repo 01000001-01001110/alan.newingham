@@ -70,6 +70,16 @@ const ContactButton = styled.a`
   }
 `;
 
+const ExternalLink = styled.a`
+  color: ${props => props.theme.colors.lightBlue};
+  text-decoration: none;
+  font-weight: ${props => props.theme.fontWeights.medium};
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const About: React.FC = () => {
   // Animation variants
   const containerVariants = {
@@ -97,55 +107,65 @@ const About: React.FC = () => {
         animate="visible"
       >
         <Section variants={itemVariants}>
-          <SectionTitle>Professional Journey</SectionTitle>
-          <Paragraph>
-            I'm Alan Newingham, a Platform Engineer and Software Developer with a passion for creating 
-            efficient, scalable solutions to complex problems. With over a decade of experience in the 
-            tech industry, I've developed expertise in cloud infrastructure, DevOps practices, and 
-            full stack development.
-          </Paragraph>
-          <Paragraph>
-            My career has taken me from IT support roles to platform engineering, allowing me to 
-            develop a comprehensive understanding of technology stacks from the ground up. This 
-            diverse background enables me to bridge the gap between development and operations, 
-            creating solutions that are both technically sound and practical to implement.
-          </Paragraph>
-        </Section>
-        
-        <Section variants={itemVariants}>
-          <SectionTitle>Philosophy & Approach</SectionTitle>
-          <Paragraph>
-            I believe in building systems that are not only functional but also maintainable and 
-            adaptable. My approach to software development and infrastructure design is guided by 
-            these principles:
-          </Paragraph>
-          <List>
-            <li>Automation is key to reliability and consistency</li>
-            <li>Documentation should be thorough, accessible, and kept up-to-date</li>
-            <li>Solutions should be simple enough to understand, but robust enough to scale</li>
-            <li>Continuous learning and adaptation are essential in a rapidly evolving field</li>
-          </List>
-          <Quote>
-            "The best technology is invisible, reliable, and empowers people to focus on what truly matters."
-          </Quote>
-        </Section>
-        
-        <Section variants={itemVariants}>
-          <SectionTitle>Beyond Code</SectionTitle>
-          <Paragraph>
-            When I'm not immersed in code or managing infrastructure, I enjoy exploring emerging 
-            technologies, contributing to open-source projects, and mentoring aspiring developers. 
-            I'm particularly interested in how technology can be leveraged to solve real-world 
-            problems and improve everyday experiences.
-          </Paragraph>
-          <Paragraph>
-            I'm always open to discussing new projects, innovative ideas, or potential collaborations. 
-            Feel free to reach out if you'd like to connect!
-          </Paragraph>
-          <ContactButton href="mailto:contact@alannewingham.com">
-            Get In Touch
-          </ContactButton>
-        </Section>
+        <SectionTitle>Professional Journey</SectionTitle>
+        <Paragraph>
+          I'm Alan Newingham, a Platform Engineer and aspiring Software Developer with a passion for creating 
+          efficient, scalable solutions to complex problems. With over two decades of experience across 
+          multiple technology domains, I've developed deep expertise in cloud infrastructure, DevOps practices, 
+          automation, and full stack development with a growing focus on AI implementation, lately dabbling in building inference farms.
+        </Paragraph>
+        <Paragraph>
+          My career path has evolved from IT support and systems administration to advanced platform 
+          engineering and cloud architecture, giving me a comprehensive understanding of technology 
+          stacks from the ground up. This diverse background enables me to bridge the gap between 
+          development and operations, designing solutions that are both technically sophisticated and 
+          practical to implement in real-world environments.
+        </Paragraph>
+      </Section>
+
+      <Section variants={itemVariants}>
+        <SectionTitle>Philosophy & Approach</SectionTitle>
+        <Paragraph>
+          I believe in building systems that are not only functional but also maintainable, adaptable, 
+          and forward-looking. My approach to software development and infrastructure design is guided 
+          by these core principles:
+        </Paragraph>
+        <List>
+          <li>Automation is essential for reliability, consistency, and freeing human creativity</li>
+          <li>Documentation should be thorough, accessible, and continuously maintained alongside code</li>
+          <li>Solutions should balance simplicity of understanding with robustness and scalability</li>
+          <li>AI and machine learning should enhance human capabilities, not replace human judgment</li>
+          <li>Continuous learning and experimentation are non-negotiable in our rapidly evolving field</li>
+        </List>
+        <Quote>
+          "The best technology is invisible, reliable, and empowers people to focus on what truly matters."
+        </Quote>
+      </Section>
+
+      <Section variants={itemVariants}>
+        <SectionTitle>Beyond Code</SectionTitle>
+        <Paragraph>
+          When I'm not immersed in code or managing infrastructure, I'm a father to three amazing kids (16, 11, and 7) 
+          who keep me both grounded and inspired. I'm deeply passionate about artificial intelligence and its 
+          practical applications, regularly building Discord bots, automation tools, and experimental projects 
+          that push the boundaries of what's possible with current technology.
+        </Paragraph>
+        <Paragraph>
+          I share my technical adventures and insights on my blog at <ExternalLink href="https://automateanddeploy.com" target="_blank" rel="noopener noreferrer">automateanddeploy.com</ExternalLink>, 
+          where I document everything from infrastructure solutions to AI experiments. My GitHub contains over 117 
+          repositories spanning Python utilities, PowerShell automation scripts, Discord bots, data processing tools, 
+          and infrastructure-as-code implementations—reflecting my philosophy that if something can be automated, 
+          it probably should be.
+        </Paragraph>
+        <Paragraph>
+          I'm always open to discussing new projects, innovative ideas, or potential collaborations. Whether it's 
+          cloud architecture, automation challenges, or exploring the latest in AI and machine learning, I'm eager 
+          to connect and share knowledge.
+        </Paragraph>
+        <ContactButton href="mailto:contact@alannewingham.com">
+          Get In Touch
+        </ContactButton>
+      </Section>
       </motion.div>
     </AboutContainer>
   );
