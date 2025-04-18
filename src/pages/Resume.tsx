@@ -311,6 +311,12 @@ const Resume: React.FC = () => {
       section.style.backgroundColor = '#252a2d';
     });
     
+    // Remove the download button from the PDF
+    const downloadButton = element.querySelector('button');
+    if (downloadButton) {
+      downloadButton.remove();
+    }
+    
     // Generate PDF with improved formatting
     html2pdf().from(element).set(options).save();
   };
