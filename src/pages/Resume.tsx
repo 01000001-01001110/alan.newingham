@@ -232,11 +232,11 @@ const Resume: React.FC = () => {
       }
     });
     
-    // Add styles specifically for PDF generation
+    // Add styles specifically for PDF generation with single-page optimization
     const styleElement = document.createElement('style');
     styleElement.textContent = `
       @page {
-        margin: 15mm;
+        margin: 10mm;
         size: A4;
       }
       @media print {
@@ -245,50 +245,88 @@ const Resume: React.FC = () => {
           print-color-adjust: exact !important;
           background-color: #1a1e20 !important;
           color: #e6f5f3 !important;
+          font-size: 9pt !important;
         }
         html {
           background-color: #1a1e20 !important;
+        }
+        h1 {
+          font-size: 18pt !important;
+          margin-bottom: 5px !important;
+        }
+        h2 {
+          font-size: 14pt !important;
+          margin-bottom: 5px !important;
+        }
+        h3 {
+          font-size: 12pt !important;
+          margin-bottom: 5px !important;
+          padding-bottom: 3px !important;
+        }
+        h4 {
+          font-size: 11pt !important;
+          margin-bottom: 3px !important;
         }
         h1, h2, h3, h4, h5, h6 {
           page-break-after: avoid;
           break-after: avoid;
         }
-        .pdf-page-break-before {
-          page-break-before: always;
-          break-before: page;
+        section {
+          padding: 10px !important;
+          margin-bottom: 10px !important;
         }
-        ul, ol, dl {
-          page-break-inside: auto;
-          break-inside: auto;
+        ul {
+          margin-left: 15px !important;
+          margin-bottom: 5px !important;
         }
-        li, dt, dd {
+        li {
+          margin-bottom: 2px !important;
           page-break-inside: avoid;
           break-inside: avoid;
-          orphans: 2;
-          widows: 2;
         }
         p {
+          margin-bottom: 5px !important;
           orphans: 3;
           widows: 3;
         }
-        section {
-          page-break-inside: auto;
-          break-inside: auto;
+        .experience-item {
+          margin-bottom: 10px !important;
+        }
+        .job-details ul {
+          margin-top: 3px !important;
+        }
+        .skills-grid {
+          display: grid !important;
+          grid-template-columns: repeat(4, 1fr) !important;
+          gap: 5px !important;
+          font-size: 8pt !important;
+        }
+        .skill-tag {
+          padding: 2px 5px !important;
+          font-size: 8pt !important;
+        }
+        .skill-level {
+          font-size: 7pt !important;
+          padding: 1px 3px !important;
+        }
+        .skill-category {
+          margin-bottom: 5px !important;
         }
       }
     `;
     element.appendChild(styleElement);
     
-    // Set up options for PDF generation with better page break handling
+    // Set up options for PDF generation optimized for single page
     const options = {
-      margin: [15, 15, 15, 15],
+      margin: [10, 10, 10, 10],
       filename: 'Alan_Newingham_Resume.pdf',
       image: { type: 'jpeg', quality: 1.0 },
       html2canvas: { 
         scale: 2, 
         useCORS: true,
         letterRendering: true,
-        backgroundColor: '#1a1e20'
+        backgroundColor: '#1a1e20',
+        windowWidth: 1000
       },
       jsPDF: { 
         unit: 'mm', 
@@ -305,10 +343,38 @@ const Resume: React.FC = () => {
     // Before generating the PDF, apply background styles to the clone
     element.style.backgroundColor = '#1a1e20';
     
-    // Find all section elements and ensure they have the correct background
+    // Find all section elements and ensure they have the correct background and compact spacing
     const sectionElements = element.querySelectorAll('section');
     sectionElements.forEach(section => {
       section.style.backgroundColor = '#252a2d';
+      section.style.padding = '10px';
+      section.style.marginBottom = '10px';
+    });
+    
+    // Compact the skills section
+    const skillsSection = element.querySelectorAll('h4');
+    skillsSection.forEach(heading => {
+      heading.classList.add('skill-category');
+      const skillContainer = heading.nextElementSibling;
+      if (skillContainer) {
+        skillContainer.classList.add('skills-grid');
+        // Add 'skill-tag' class to all skill tags
+        const skillTags = skillContainer.querySelectorAll('span');
+        skillTags.forEach(tag => {
+          tag.classList.add('skill-tag');
+          // Find the proficiency level indicator
+          const levelIndicator = tag.querySelector('span');
+          if (levelIndicator) {
+            levelIndicator.classList.add('skill-level');
+          }
+        });
+      }
+    });
+    
+    // Add classes to experience items
+    const expItems = element.querySelectorAll('.job-item');
+    expItems.forEach(item => {
+      item.querySelectorAll('ul').forEach(ul => ul.classList.add('job-details'));
     });
     
     // Remove the download button from the PDF
