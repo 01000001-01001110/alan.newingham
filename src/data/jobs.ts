@@ -45,7 +45,7 @@ export const jobs: Job[] = [
   },
   {
     id: 'fullsteam',
-    title: 'Platform Engineer, Enterprise Services',
+    title: 'Platform Engineer',
     company: 'Fullsteam LLC',
     startDate: '2022-09',
     endDate: 'Present',
