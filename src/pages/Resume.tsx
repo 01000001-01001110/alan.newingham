@@ -126,6 +126,10 @@ const ExperienceContainer = styled.div`
 
 const ExperienceItem = styled.div`
   margin-bottom: ${props => props.theme.space.lg};
+  
+  &.pdf-page-break-before {
+    page-break-before: always;
+  }
 `;
 
 const ExperienceHeader = styled.div`
@@ -133,6 +137,7 @@ const ExperienceHeader = styled.div`
   justify-content: space-between;
   margin-bottom: ${props => props.theme.space.sm};
   flex-wrap: wrap;
+  page-break-after: avoid;
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     flex-direction: column;
@@ -143,6 +148,7 @@ const ExperienceTitle = styled.h4`
   font-size: ${props => props.theme.fontSizes.lg};
   color: ${props => props.theme.colors.lightBlue};
   margin: 0;
+  page-break-after: avoid;
 `;
 
 const ExperienceCompany = styled.div`
@@ -177,6 +183,17 @@ const ExperienceDetails = styled.ul`
 
 const ExperienceDetail = styled.li`
   margin-bottom: ${props => props.theme.space.xs};
+  orphans: 2;
+  widows: 2;
+`;
+
+// Add PDF-specific styles
+const PdfStyles = styled.div`
+  display: none;
+  
+  @media print {
+    display: none;
+  }
 `;
 
 const Resume: React.FC = () => {
@@ -201,19 +218,86 @@ const Resume: React.FC = () => {
   const handleDownloadPDF = () => {
     if (!resumeRef.current) return;
     
-    const element = resumeRef.current;
+    // Create a new element to modify for PDF generation without affecting the displayed resume
+    const element = resumeRef.current.cloneNode(true) as HTMLElement;
     
-    // Set up options for PDF generation
+    // Add explicit page break classes to job sections for better PDF formatting
+    const jobElements = element.querySelectorAll(ExperienceItem.toString().split(' ')[0]); // Get the CSS class name
+    
+    // Add page breaks before certain positions (except the first one)
+    jobElements.forEach((job, index) => {
+      // Add page break before some elements to force better page layout
+      if (index > 0 && index % 2 === 0) {
+        job.classList.add('pdf-page-break-before');
+      }
+    });
+    
+    // Add styles specifically for PDF generation
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+      @page {
+        margin: 15mm;
+        size: A4;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          page-break-after: avoid;
+          break-after: avoid;
+        }
+        .pdf-page-break-before {
+          page-break-before: always;
+          break-before: page;
+        }
+        ul, ol, dl {
+          page-break-inside: auto;
+          break-inside: auto;
+        }
+        li, dt, dd {
+          page-break-inside: avoid;
+          break-inside: avoid;
+          orphans: 2;
+          widows: 2;
+        }
+        p {
+          orphans: 3;
+          widows: 3;
+        }
+        section {
+          page-break-inside: auto;
+          break-inside: auto;
+        }
+      }
+    `;
+    element.appendChild(styleElement);
+    
+    // Set up options for PDF generation with better page break handling
     const options = {
-      margin: [10, 10, 10, 10],
+      margin: [15, 15, 15, 15],
       filename: 'Alan_Newingham_Resume.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      image: { type: 'jpeg', quality: 1.0 },
+      html2canvas: { 
+        scale: 2, 
+        useCORS: true,
+        letterRendering: true
+      },
+      jsPDF: { 
+        unit: 'mm', 
+        format: 'a4', 
+        orientation: 'portrait',
+        compress: true
+      },
+      pagebreak: { 
+        mode: ['avoid-all', 'css', 'legacy'],
+        before: '.pdf-page-break-before'
+      }
     };
     
-    // Generate PDF
-    html2pdf().set(options).from(element).save();
+    // Generate PDF with improved formatting
+    html2pdf().from(element).set(options).save();
   };
 
   return (
@@ -296,7 +380,7 @@ const Resume: React.FC = () => {
               const endDateB = b.endDate === 'Present' ? new Date().getFullYear().toString() : b.endDate.split('-')[0];
               return endDateB.localeCompare(endDateA);
             }).map(job => (
-              <ExperienceItem key={job.id}>
+              <ExperienceItem key={job.id} className="job-item">
                 <ExperienceHeader>
                   <div>
                     <ExperienceTitle>{job.title}</ExperienceTitle>
@@ -608,6 +692,26 @@ const Resume: React.FC = () => {
           </motion.div>
         </ResumeSection>
       </motion.div>
+      
+      {/* Add hidden styles that will be used in the PDF */}
+      <PdfStyles>
+        <style type="text/css" dangerouslySetInnerHTML={{ __html: `
+          @media print {
+            h1, h2, h3, h4, h5, h6 {
+              page-break-after: avoid;
+              break-after: avoid;
+            }
+            li, dt, dd {
+              page-break-inside: avoid;
+              break-inside: avoid;
+            }
+            p {
+              orphans: 3;
+              widows: 3;
+            }
+          }
+        `}} />
+      </PdfStyles>
     </ResumeContainer>
   );
 };
