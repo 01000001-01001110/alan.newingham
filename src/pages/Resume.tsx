@@ -484,7 +484,7 @@ const Resume: React.FC = () => {
                   {job.id === 'fullsteam' && (
                     <>
                       <ExperienceDetail>
-                        Architected and deployed infrastructure-as-code solutions using Terraform and Bicep for payments gateway and multiple business units.
+                        Architected and deployed infrastructure-as-code solutions using Terraform and Bicep, wrapped with Ansible, and orchestration with Jenkins for payments gateway and multiple business units.
                       </ExperienceDetail>
                       <ExperienceDetail>
                         Developed Flask applications and engineering tools that improved team productivity.
@@ -497,6 +497,9 @@ const Resume: React.FC = () => {
                       </ExperienceDetail>
                       <ExperienceDetail>
                         Reorganized technical documentation, significantly improving knowledge sharing and onboarding.
+                      </ExperienceDetail>
+                      <ExperienceDetail>
+                        Developed comprehensive documentation across all projects, including detailed technical specifications, architecture diagrams, and process flows. Specialized in creating clear solution documentation for complex technical issues, ensuring knowledge transfer and preventing recurring problems.
                       </ExperienceDetail>
                     </>
                   )}
