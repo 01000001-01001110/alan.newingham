@@ -208,11 +208,11 @@ const ExperienceList: React.FC<ExperienceListProps> = ({ jobs, selectedTechnolog
           <JobContent>
             <SectionTitle>Key Responsibilities</SectionTitle>
             <ResponsibilitiesList>
-              {job.responsibilities.slice(0, 5).map((responsibility, index) => (
+              {job.responsibilities.slice(0, 3).map((responsibility, index) => (
                 <li key={index}>{responsibility}</li>
               ))}
-              {job.responsibilities.length > 5 && (
-                <li key="more">And {job.responsibilities.length - 5} more responsibilities...</li>
+              {job.responsibilities.length > 3 && (
+                <li key="more">And {job.responsibilities.length - 3} more responsibilities...</li>
               )}
             </ResponsibilitiesList>
             
