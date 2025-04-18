@@ -92,22 +92,22 @@ const Footer: React.FC = () => {
           
           <FooterSection>
             <SectionTitle>Connect</SectionTitle>
-            <ExternalLink href="https://github.com/alannewingham" target="_blank" rel="noopener noreferrer">
+            <ExternalLink href="https://github.com/01000001-01001110" target="_blank" rel="noopener noreferrer">
               GitHub
             </ExternalLink>
             <ExternalLink href="https://linkedin.com/in/alan-newingham" target="_blank" rel="noopener noreferrer">
               LinkedIn
             </ExternalLink>
-            <ExternalLink href="mailto:contact@alannewingham.com">
+            <ExternalLink href="mailto:alan.newingham@gmail.com">
               Email
             </ExternalLink>
           </FooterSection>
           
           <FooterSection>
             <SectionTitle>Resources</SectionTitle>
-            <ExternalLink href="/AlanNewingham_Resume.pdf" target="_blank">
-              Download Resume
-            </ExternalLink>
+            <FooterLink to="/resume">
+              Resume
+            </FooterLink>
             <FooterLink to="/skills">Skills & Technologies</FooterLink>
             <FooterLink to="/projects">Project Portfolio</FooterLink>
           </FooterSection>
