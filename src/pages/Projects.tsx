@@ -71,6 +71,12 @@ const ProjectImage = styled.img`
   object-fit: cover;
 `;
 
+// Helper function to fix image paths for deployment
+const fixImagePath = (path: string) => {
+  // Replace %PUBLIC_URL% with the actual public URL path
+  return path.replace('%PUBLIC_URL%', process.env.PUBLIC_URL || '');
+};
+
 const ProjectContent = styled.div`
   padding: ${props => props.theme.space.lg};
 `;
@@ -182,7 +188,10 @@ const Projects: React.FC = () => {
       >
         {filteredProjects.map(project => (
           <ProjectCard key={project.id} variants={itemVariants}>
-            <ProjectImage src={project.thumbnail} alt={project.name} />
+            <ProjectImage 
+              src={project.thumbnail ? fixImagePath(project.thumbnail) : `${process.env.PUBLIC_URL || ''}/transcriber.png`} 
+              alt={project.name} 
+            />
             <ProjectContent>
               <ProjectTitle>{project.name}</ProjectTitle>
               <ProjectDescription>{project.description}</ProjectDescription>
