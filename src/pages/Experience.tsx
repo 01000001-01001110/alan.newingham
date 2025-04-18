@@ -127,7 +127,7 @@ const NotFound = styled.div`
 
 // Helper function to determine if a text is paragraph style or list item style
 const isParagraphStyle = (text: string): boolean => {
-  return text.length > 100; // If text is longer than 100 chars, treat as paragraph
+  return false; // Always use bullet points for consistency across job pages
 };
 
 const Experience: React.FC = () => {
