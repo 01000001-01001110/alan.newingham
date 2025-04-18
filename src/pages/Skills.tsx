@@ -301,7 +301,7 @@ const Skills: React.FC = () => {
     );
     
     if (matchingTechnology) {
-      navigate(`/experiences?tech=${encodeURIComponent(matchingTechnology)}`);
+      navigate(`/experience?tech=${encodeURIComponent(matchingTechnology)}`);
     }
   };
 
@@ -311,7 +311,7 @@ const Skills: React.FC = () => {
     
     if (exactMappings && exactMappings.length > 0) {
       // Use the first mapping in our list
-      navigate(`/experiences?tech=${encodeURIComponent(exactMappings[0])}`);
+      navigate(`/experience?tech=${encodeURIComponent(exactMappings[0])}`);
       return;
     }
     
@@ -321,9 +321,9 @@ const Skills: React.FC = () => {
     );
 
     if (matchingTechnology) {
-      navigate(`/experiences?tech=${encodeURIComponent(matchingTechnology)}`);
+      navigate(`/experience?tech=${encodeURIComponent(matchingTechnology)}`);
     } else {
-      navigate('/experiences');
+      navigate('/experience');
     }
   };
   
@@ -387,14 +387,16 @@ const Skills: React.FC = () => {
                     </RelatedSkillsContainer>
                   )}
                   
-                  {hasRelatedJobs && (
-                    <JobsSection>
+                  <JobsSection>
+                    {hasRelatedJobs ? (
                       <JobsLabel>Used in {relatedJobs.length} job{relatedJobs.length !== 1 ? 's' : ''}</JobsLabel>
-                      <ViewExperiencesButton onClick={() => navigateToExperiences(skill.name, skill.id)}>
-                        View Experiences
-                      </ViewExperiencesButton>
-                    </JobsSection>
-                  )}
+                    ) : (
+                      <JobsLabel>View all experience</JobsLabel>
+                    )}
+                    <ViewExperiencesButton onClick={() => navigateToExperiences(skill.name, skill.id)}>
+                      View Experiences
+                    </ViewExperiencesButton>
+                  </JobsSection>
                 </SkillCard>
               );
             })}
