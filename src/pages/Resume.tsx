@@ -243,6 +243,11 @@ const Resume: React.FC = () => {
         body {
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
+          background-color: #1a1e20 !important;
+          color: #e6f5f3 !important;
+        }
+        html {
+          background-color: #1a1e20 !important;
         }
         h1, h2, h3, h4, h5, h6 {
           page-break-after: avoid;
@@ -282,7 +287,8 @@ const Resume: React.FC = () => {
       html2canvas: { 
         scale: 2, 
         useCORS: true,
-        letterRendering: true
+        letterRendering: true,
+        backgroundColor: '#1a1e20'
       },
       jsPDF: { 
         unit: 'mm', 
@@ -295,6 +301,15 @@ const Resume: React.FC = () => {
         before: '.pdf-page-break-before'
       }
     };
+    
+    // Before generating the PDF, apply background styles to the clone
+    element.style.backgroundColor = '#1a1e20';
+    
+    // Find all section elements and ensure they have the correct background
+    const sectionElements = element.querySelectorAll('section');
+    sectionElements.forEach(section => {
+      section.style.backgroundColor = '#252a2d';
+    });
     
     // Generate PDF with improved formatting
     html2pdf().from(element).set(options).save();
