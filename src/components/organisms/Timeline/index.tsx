@@ -8,11 +8,6 @@ interface TimelineProps {
   jobs: Job[];
 }
 
-// Define a type for the peak points
-interface PeakPoint {
-  x: number;
-  y: number;
-}
 
 const TimelineContainer = styled.div`
   max-width: 1200px;
@@ -30,11 +25,6 @@ const TimelineSvg = styled.svg`
   height: 280px;
   display: block;
   margin: 0 auto;
-`;
-
-const TimelineBase = styled.line`
-  stroke: ${props => props.theme.colors.gray};
-  stroke-width: 2;
 `;
 
 const TimelineYear = styled.text`
@@ -71,15 +61,6 @@ const JobTriangle = styled(motion.path)<JobTriangleProps>`
   filter: ${props => `drop-shadow(0 ${props.$zIndex * 2}px ${props.$zIndex * 1.5}px rgba(0,0,0,0.3))`};
 `;
 
-// Animated outline that will trace around the timeline
-const AnimatedOutline = styled(motion.path)`
-  fill: none;
-  stroke: white;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 3px rgba(255,255,255,0.7));
-`;
 
 const JobTitle = styled.text`
   fill: ${props => props.theme.colors.lightestBlue};
@@ -378,12 +359,13 @@ const TimelineComponent: React.FC<TimelineProps> = ({ jobs }) => {
       const perimeter = timelineWidth * 2; // rough estimate
       setDashLength(perimeter);
     }
-  }, [sortedByDuration, timelineWidth]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortedByDuration, timelineWidth, generateOutlinePath]);
   
   // Find the cloud migration engineer job for the special white line segment
   const cloudMigrationJob = sortedByDuration.find(job => job.id === 'cloud-migration-engineer');
   const cloudMigrationZIndex = cloudMigrationJob ? sortedByDuration.findIndex(job => job.id === 'cloud-migration-engineer') : -1;
-  const cloudMigrationPath = cloudMigrationJob ? calculateTrianglePath(cloudMigrationJob, cloudMigrationZIndex) : '';
+  // const cloudMigrationPath = cloudMigrationJob ? calculateTrianglePath(cloudMigrationJob, cloudMigrationZIndex) : '';
   
   return (
     <TimelineContainer>
