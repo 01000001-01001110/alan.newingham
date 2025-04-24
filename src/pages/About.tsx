@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import introParagraph from '../data/intro';
 
 const AboutContainer = styled.div`
   padding: ${props => props.theme.space.lg} 0;
@@ -109,17 +110,7 @@ const About: React.FC = () => {
         <Section variants={itemVariants}>
         <SectionTitle>Professional Journey</SectionTitle>
         <Paragraph>
-          I'm Alan Newingham, a Platform Engineer and aspiring Software Developer with a passion for creating 
-          efficient, scalable solutions to complex problems. With over two decades of experience across 
-          multiple technology domains, I've developed deep expertise in cloud infrastructure, DevOps practices, 
-          automation, and full stack development with a growing focus on AI implementation, lately dabbling in building inference farms.
-        </Paragraph>
-        <Paragraph>
-          My career path has evolved from IT support and systems administration to advanced platform 
-          engineering and cloud architecture, giving me a comprehensive understanding of technology 
-          stacks from the ground up. This diverse background enables me to bridge the gap between 
-          development and operations, designing solutions that are both technically sophisticated and 
-          practical to implement in real-world environments.
+          {introParagraph}
         </Paragraph>
       </Section>
 

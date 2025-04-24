@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import skills from '../data/skills';
 import jobs from '../data/jobs';
+import introParagraph from '../data/intro';
 import html2pdf from 'html2pdf.js';
 
 const ResumeContainer = styled.div`
@@ -411,7 +412,7 @@ const Resume: React.FC = () => {
             <div>
               <PersonalInfoItem>
                 <PersonalInfoLabel>Phone:</PersonalInfoLabel>
-                <PersonalInfoValue>3868460955</PersonalInfoValue>
+                <PersonalInfoValue>0000000000</PersonalInfoValue>
               </PersonalInfoItem>
               <PersonalInfoItem>
                 <PersonalInfoLabel>Email:</PersonalInfoLabel>
@@ -435,7 +436,7 @@ const Resume: React.FC = () => {
           </PersonalInfoContainer>
           
           <Summary>
-            I am a results-driven Platform Engineer with 25+ years in IT, specializing in cloud architecture, infrastructure automation, and modern DevOps methodologies. I combine deep technical expertise in Azure/AWS environments with strong security implementation practices to deliver innovative solutions that enhance operational efficiency while reducing costs. My core strength lies in building scalable infrastructure and automating complex processes through code, consistently achieving measurable improvements in deployment time and system reliability.
+            {introParagraph}
           </Summary>
         </ResumeSection>
         

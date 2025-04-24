@@ -8,17 +8,28 @@ interface TimelineProps {
   jobs: Job[];
 }
 
+// Define a type for the peak points
+interface PeakPoint {
+  x: number;
+  y: number;
+}
+
 const TimelineContainer = styled.div`
+  max-width: 1200px;
   width: 100%;
+  margin: 0 auto;
+  text-align: center;
   overflow-x: auto;
-  margin: ${props => props.theme.space.xl} 0;
   padding: ${props => props.theme.space.md} 0;
+  position: relative;
 `;
 
 const TimelineSvg = styled.svg`
   width: 100%;
   min-width: 800px;
   height: 280px;
+  display: block;
+  margin: 0 auto;
 `;
 
 const TimelineBase = styled.line`
@@ -58,6 +69,16 @@ const JobTriangle = styled(motion.path)<JobTriangleProps>`
   cursor: pointer;
   transition: fill 0.3s, stroke 0.3s;
   filter: ${props => `drop-shadow(0 ${props.$zIndex * 2}px ${props.$zIndex * 1.5}px rgba(0,0,0,0.3))`};
+`;
+
+// Animated outline that will trace around the timeline
+const AnimatedOutline = styled(motion.path)`
+  fill: none;
+  stroke: white;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,0.7));
 `;
 
 const JobTitle = styled.text`
@@ -280,16 +301,97 @@ const TimelineComponent: React.FC<TimelineProps> = ({ jobs }) => {
     };
   };
   
+  // Generate the outline path for the animated stroke that traces the mountain silhouette
+  const generateOutlinePath = (): string => {
+    // Get all triangles and sort them by x position (left to right)
+    const trianglesByX = [...sortedByDuration].sort((a, b) => a.startX - b.startX);
+    if (trianglesByX.length === 0) return '';
+
+    // Base Y coordinate for the timeline
+    const baseY = 140;
+
+    // Collect all triangle edges (left, peak, right) as line segments
+    type Point = { x: number, y: number };
+    type Segment = { x1: number, y1: number, x2: number, y2: number };
+    const segments: Segment[] = [];
+
+    trianglesByX.forEach((job, idx) => {
+      const originalIndex = sortedByDuration.findIndex(j => j.id === job.id);
+      const { startX, endX } = job;
+      const width = endX - startX;
+      const baseHeight = Math.min(110, Math.max(50, job.duration * 2));
+      const height = baseHeight - (originalIndex * 5);
+      const peakX = startX + width / 2;
+      const peakY = baseY - height;
+
+      // Left edge
+      segments.push({ x1: startX, y1: baseY, x2: peakX, y2: peakY });
+      // Right edge
+      segments.push({ x1: peakX, y1: peakY, x2: endX, y2: baseY });
+    });
+
+    // Sample X values across the whole timeline (1px step for smoothness)
+    const leftEdge = trianglesByX[0].startX;
+    const rightEdge = trianglesByX[trianglesByX.length - 1].endX;
+    const step = 1;
+    const pathPoints: Point[] = [];
+
+    for (let x = leftEdge; x <= rightEdge; x += step) {
+      let minY = baseY;
+      segments.forEach(seg => {
+        // Check if x is between seg.x1 and seg.x2
+        if ((seg.x1 <= x && x <= seg.x2) || (seg.x2 <= x && x <= seg.x1)) {
+          // Linear interpolation to get y at x
+          const t = (x - seg.x1) / (seg.x2 - seg.x1);
+          const y = seg.y1 + t * (seg.y2 - seg.y1);
+          if (y < minY) minY = y;
+        }
+      });
+      pathPoints.push({ x, y: minY });
+    }
+
+    // Start at left base
+    let pathData = `M ${leftEdge},${baseY}`;
+    // Follow the upper contour
+    pathPoints.forEach(pt => {
+      pathData += ` L ${pt.x},${pt.y}`;
+    });
+    // End at right base
+    pathData += ` L ${rightEdge},${baseY}`;
+    // Close the path
+    pathData += ` L ${leftEdge},${baseY}`;
+
+    return pathData;
+  };
+  
+  // Animation for the dash effect
+  const [dashLength, setDashLength] = useState(0);
+  const [outlinePath, setOutlinePath] = useState('');
+  
+  useEffect(() => {
+    if (sortedByDuration.length > 0) {
+      const path = generateOutlinePath();
+      setOutlinePath(path);
+      
+      // Calculate path length for the animation
+      // This is approximate since we don't have direct access to the SVG path length
+      const perimeter = timelineWidth * 2; // rough estimate
+      setDashLength(perimeter);
+    }
+  }, [sortedByDuration, timelineWidth]);
+  
+  // Find the cloud migration engineer job for the special white line segment
+  const cloudMigrationJob = sortedByDuration.find(job => job.id === 'cloud-migration-engineer');
+  const cloudMigrationZIndex = cloudMigrationJob ? sortedByDuration.findIndex(job => job.id === 'cloud-migration-engineer') : -1;
+  const cloudMigrationPath = cloudMigrationJob ? calculateTrianglePath(cloudMigrationJob, cloudMigrationZIndex) : '';
+  
   return (
     <TimelineContainer>
       <TimelineSvg
         ref={timelineRef}
         viewBox={`0 0 ${timelineWidth} 280`}
-        preserveAspectRatio="xMinYMid meet"
+        preserveAspectRatio="xMidYMid meet"
       >
-        {/* Base timeline */}
-        <TimelineBase x1="0" y1="140" x2={timelineWidth} y2="140" />
-        
         {/* Year markers */}
         {yearMarkers}
         
@@ -308,6 +410,8 @@ const TimelineComponent: React.FC<TimelineProps> = ({ jobs }) => {
                 onClick={() => handleJobClick(job.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                // Remove drop-shadow for cloud-migration-engineer so white line is on top
+                style={job.id === 'cloud-migration-engineer' ? { filter: 'none' } : undefined}
               />
               
               {/* Title background for better readability */}
@@ -342,6 +446,39 @@ const TimelineComponent: React.FC<TimelineProps> = ({ jobs }) => {
             </g>
           );
         })}
+        
+        {/* Animated white outline that traces the mountain silhouette */}
+        {outlinePath && (
+          <motion.path
+            d={outlinePath}
+            fill="none"
+            stroke="white"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="drop-shadow(0 0 6px rgba(255,255,255,1))"
+            initial={{ strokeDasharray: dashLength, strokeDashoffset: dashLength, opacity: 1 }}
+            animate={{ 
+              strokeDashoffset: [dashLength, -dashLength],
+              opacity: [1, 1, 0]
+            }}
+            transition={{
+              strokeDashoffset: {
+                duration: 12,
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "loop"
+              },
+              opacity: {
+                times: [0, 0.83, 1], // 0-10s: 1, 10-12s: fade to 0
+                duration: 12,
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "loop"
+              }
+            }}
+          />
+        )}
       </TimelineSvg>
     </TimelineContainer>
   );

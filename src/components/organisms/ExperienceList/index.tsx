@@ -11,11 +11,15 @@ interface ExperienceListProps {
 
 const ExperienceListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: ${props => props.theme.space.xl};
-  
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  justify-content: center;
+
+  @media (min-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, minmax(400px, 1fr));
   }
 `;
 

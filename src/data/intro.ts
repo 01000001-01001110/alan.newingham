@@ -1,0 +1,3 @@
+const introParagraph = `Results-driven Platform Engineer with 25+ years in IT, specializing in cloud architecture, DevOps automation, and advanced AI integrations. Expert in developing enterprise-grade pipelines using OpenAI, Gemini, Anthropic, and Mistral APIs with Terraform/Bicep infrastructure-as-code solutions. Demonstrated success implementing security-critical systems, and architecting certificate management workflows for payment services. Consistently transforms complex processes into elegant automated solutions while improving documentation standards and team productivity through custom engineering tools.`;
+
+export default introParagraph;

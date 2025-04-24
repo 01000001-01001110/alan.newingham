@@ -7,6 +7,9 @@ import skills from '../data/skills';
 
 const ExperiencesContainer = styled.div`
   padding: ${props => props.theme.space.lg} 0;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const Title = styled.h1`
@@ -25,99 +28,64 @@ const Description = styled.p`
   line-height: ${props => props.theme.lineHeights.loose};
 `;
 
-// Two-column grid layout
-const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 300px; // Main content and 300px fixed sidebar
-  gap: ${props => props.theme.space.xl};
-  
-  // On mobile, switch to single column
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-  }
-`;
 
-// Left column for job listing
-const MainContent = styled.div`
-  width: 100%;
-`;
-
-// Right column for filters
-const Sidebar = styled.div`
-  width: 100%;
-`;
-
-// Vertical filter sidebar
-const FilterSidebar = styled.div`
+// Horizontal filter bar
+const FilterBar = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${props => props.theme.space.md};
-  position: sticky;
-  top: ${props => props.theme.space.xl};
+  align-items: stretch;
+  justify-content: flex-start;
   background-color: ${props => props.theme.colors.surface};
-  padding: ${props => props.theme.space.lg};
+  padding: ${props => props.theme.space.sm};
   border-radius: ${props => props.theme.radii.lg};
   box-shadow: ${props => props.theme.shadows.md};
-  
-  // On mobile, remove sticky behavior
-  @media (max-width: 1024px) {
-    position: static;
-    margin-bottom: ${props => props.theme.space.xl};
-  }
+  margin-bottom: ${props => props.theme.space.lg};
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const FilterTitle = styled.h3`
   font-size: ${props => props.theme.fontSizes.xl};
   color: ${props => props.theme.colors.lightestBlue};
-  margin-bottom: ${props => props.theme.space.md};
+  margin-bottom: 0;
+  margin-right: ${props => props.theme.space.lg};
 `;
 
 const FilterDescription = styled.p`
   font-size: ${props => props.theme.fontSizes.md};
   color: ${props => props.theme.colors.textSecondary};
-  margin-bottom: ${props => props.theme.space.lg};
+  margin-bottom: 0;
+  margin-right: ${props => props.theme.space.lg};
   line-height: ${props => props.theme.lineHeights.normal};
 `;
 
 const FilterButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: ${props => props.theme.space.sm};
-  max-height: 500px;
-  overflow-y: auto;
-  padding-right: ${props => props.theme.space.sm};
-  
-  /* Scrollbar styling */
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: ${props => props.theme.colors.darkestBlue};
-    border-radius: ${props => props.theme.radii.full};
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.colors.darkBlue};
-    border-radius: ${props => props.theme.radii.full};
-  }
-  
-  &::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.theme.colors.blueGray};
-  }
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: ${props => props.theme.colors.blueGray} ${props => props.theme.colors.surface};
 `;
 
 const FilterButton = styled.button<{ $active: boolean }>`
-  padding: ${props => `${props.theme.space.sm} ${props.theme.space.md}`};
+  padding: 0.25rem 0.75rem;
   background-color: ${props => props.$active ? props.theme.colors.lightBlue : props.theme.colors.blueGray};
   color: ${props => props.$active ? props.theme.colors.dark : props.theme.colors.lightestBlue};
   border: none;
   border-radius: ${props => props.theme.radii.md};
-  font-size: ${props => props.theme.fontSizes.md};
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all ${props => props.theme.transitions.fast};
   text-align: left;
-  
+  white-space: nowrap;
+  margin-bottom: 0;
+
   &:hover {
     background-color: ${props => props.$active ? props.theme.colors.lightBlue : props.theme.colors.darkBlue};
   }
@@ -152,7 +120,7 @@ const ResetFilterButton = styled.button`
   font-size: ${props => props.theme.fontSizes.sm};
   cursor: pointer;
   transition: all ${props => props.theme.transitions.fast};
-  margin-top: ${props => props.theme.space.md};
+  margin-left: ${props => props.theme.space.lg};
   
   &:hover {
     background-color: ${props => props.theme.colors.darkestBlue};
@@ -219,54 +187,47 @@ const Experiences: React.FC = () => {
         infrastructure and automating complex processes through code, consistently achieving measurable 
         improvements in deployment time and system reliability.
       </Description>
-      
-      {/* Two-column layout: main content (left) and sidebar (right) */}
-      <ContentGrid>
-        {/* Main content column */}
-        <MainContent>
-          {selectedTechnology && relatedSkills && relatedSkills.length > 0 && (
-            <SelectedTechInfo>
-              <SelectedTechTitle>About {selectedTechnology}</SelectedTechTitle>
-              <SelectedTechDescription>
-                {relatedSkills[0].description || `${selectedTechnology} is one of my technical skills with experience spanning multiple projects.`}
-              </SelectedTechDescription>
-            </SelectedTechInfo>
+
+      {/* Horizontal filter bar at the top */}
+      <FilterBar>
+        <div style={{ flexBasis: "100%" }}>
+          <FilterTitle>Filter by Technology</FilterTitle>
+          <FilterDescription>
+            Filter my experience by specific technologies to see where I've applied them professionally.
+          </FilterDescription>
+        </div>
+        <FilterButtonContainer style={{ flex: 1, minWidth: 0, overflowX: "auto" }}>
+          {technologies.map(tech => (
+            <FilterButton
+              key={tech}
+              $active={selectedTechnology === tech || (tech === 'All' && !selectedTechnology)}
+              onClick={() => handleTechnologySelect(tech)}
+            >
+              {tech}
+            </FilterButton>
+          ))}
+          {selectedTechnology && (
+            <ResetFilterButton onClick={resetFilter}>
+              Clear Filter
+            </ResetFilterButton>
           )}
-          
-          <ExperienceList 
-            jobs={jobs} 
-            selectedTechnology={selectedTechnology} 
-          />
-        </MainContent>
-        
-        {/* Sidebar column */}
-        <Sidebar>
-          <FilterSidebar>
-            <FilterTitle>Filter by Technology</FilterTitle>
-            <FilterDescription>
-              Filter my experience by specific technologies to see where I've applied them professionally.
-            </FilterDescription>
-            
-            <FilterButtonContainer>
-              {technologies.map(tech => (
-                <FilterButton
-                  key={tech}
-                  $active={selectedTechnology === tech || (tech === 'All' && !selectedTechnology)}
-                  onClick={() => handleTechnologySelect(tech)}
-                >
-                  {tech}
-                </FilterButton>
-              ))}
-            </FilterButtonContainer>
-            
-            {selectedTechnology && (
-              <ResetFilterButton onClick={resetFilter}>
-                Clear Filter
-              </ResetFilterButton>
-            )}
-          </FilterSidebar>
-        </Sidebar>
-      </ContentGrid>
+        </FilterButtonContainer>
+      </FilterBar>
+      
+      {/* Centered experience grid */}
+      {selectedTechnology && relatedSkills && relatedSkills.length > 0 && (
+        <SelectedTechInfo>
+          <SelectedTechTitle>About {selectedTechnology}</SelectedTechTitle>
+          <SelectedTechDescription>
+            {relatedSkills[0].description || `${selectedTechnology} is one of my technical skills with experience spanning multiple projects.`}
+          </SelectedTechDescription>
+        </SelectedTechInfo>
+      )}
+      
+      <ExperienceList 
+        jobs={jobs} 
+        selectedTechnology={selectedTechnology} 
+      />
     </ExperiencesContainer>
   );
 };

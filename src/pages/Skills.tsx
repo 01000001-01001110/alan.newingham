@@ -7,6 +7,9 @@ import jobs from '../data/jobs';
 
 const SkillsContainer = styled.div`
   padding: ${props => props.theme.space.lg} 0;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const Title = styled.h1`
@@ -25,72 +28,64 @@ const Description = styled.p`
   line-height: ${props => props.theme.lineHeights.loose};
 `;
 
-// Two-column layout
-const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 300px; // Main content and 300px fixed sidebar
-  gap: ${props => props.theme.space.xl};
-  
-  // On mobile, switch to single column
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-  }
-`;
 
-// Left column for skills grid
-const MainContent = styled.div`
-  width: 100%;
-`;
-
-// Right column for category filters
-const Sidebar = styled.div`
-  width: 100%;
-`;
-
-// Vertical filter sidebar
-const FilterSidebar = styled.div`
+// Horizontal filter bar for categories
+const FilterBar = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${props => props.theme.space.md};
-  position: sticky;
-  top: ${props => props.theme.space.xl};
+  align-items: stretch;
+  justify-content: flex-start;
   background-color: ${props => props.theme.colors.surface};
-  padding: ${props => props.theme.space.lg};
+  padding: ${props => props.theme.space.sm};
   border-radius: ${props => props.theme.radii.lg};
   box-shadow: ${props => props.theme.shadows.md};
-  
-  // On mobile, remove sticky behavior
-  @media (max-width: 1024px) {
-    position: static;
-    margin-bottom: ${props => props.theme.space.xl};
-  }
+  margin-bottom: ${props => props.theme.space.lg};
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const FilterTitle = styled.h3`
   font-size: ${props => props.theme.fontSizes.xl};
   color: ${props => props.theme.colors.lightestBlue};
-  margin-bottom: ${props => props.theme.space.md};
+  margin-bottom: 0;
+  margin-right: ${props => props.theme.space.lg};
 `;
 
 const FilterDescription = styled.p`
   font-size: ${props => props.theme.fontSizes.md};
   color: ${props => props.theme.colors.textSecondary};
-  margin-bottom: ${props => props.theme.space.lg};
+  margin-bottom: 0;
+  margin-right: ${props => props.theme.space.lg};
   line-height: ${props => props.theme.lineHeights.normal};
 `;
 
+const FilterButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: ${props => props.theme.colors.blueGray} ${props => props.theme.colors.surface};
+`;
+
 const FilterButton = styled.button<{ $active: boolean }>`
-  padding: ${props => `${props.theme.space.sm} ${props.theme.space.md}`};
+  padding: 0.25rem 0.75rem;
   background-color: ${props => props.$active ? props.theme.colors.lightBlue : props.theme.colors.blueGray};
   color: ${props => props.$active ? props.theme.colors.dark : props.theme.colors.lightestBlue};
   border: none;
   border-radius: ${props => props.theme.radii.md};
-  font-size: ${props => props.theme.fontSizes.md};
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all ${props => props.theme.transitions.fast};
-  margin-bottom: ${props => props.theme.space.sm};
   text-align: left;
-  
+  white-space: nowrap;
+  margin-bottom: 0;
+
   &:hover {
     background-color: ${props => props.$active ? props.theme.colors.lightBlue : props.theme.colors.darkBlue};
   }
@@ -98,8 +93,16 @@ const FilterButton = styled.button<{ $active: boolean }>`
 
 const SkillsGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: ${props => props.theme.space.lg};
+  justify-content: center;
+
+  @media (min-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, minmax(400px, 1fr));
+  }
 `;
 
 const SkillCard = styled(motion.div)`
@@ -335,94 +338,90 @@ const Skills: React.FC = () => {
         Throughout my career, I've developed expertise in a range of technical and soft skills.
         Use the filters to explore my skills by category. Click on related skills or the "View Experiences" button to see job experiences where I've applied these skills.
       </Description>
+
+      {/* Horizontal filter bar at the top */}
+      <FilterBar>
+        <div style={{ flexBasis: "100%" }}>
+          <FilterTitle>Filter by Category</FilterTitle>
+          <FilterDescription>
+            View my skills grouped by category to better understand my expertise areas.
+          </FilterDescription>
+        </div>
+        <FilterButtonContainer style={{ flex: 1, minWidth: 0, overflowX: "auto" }}>
+          {categories.map(category => (
+            <FilterButton
+              key={category}
+              $active={selectedCategory === category || (category === 'All' && !selectedCategory)}
+              onClick={() => setSelectedCategory(category === 'All' ? null : category)}
+            >
+              {category === 'All' ? 'All Skills' : formatCategory(category)}
+            </FilterButton>
+          ))}
+        </FilterButtonContainer>
+      </FilterBar>
       
-      {/* Two-column layout: main content (left) and sidebar (right) */}
-      <ContentGrid>
-        {/* Main content - Skills grid */}
-        <MainContent>
-          <SkillsGrid
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {filteredSkills.map(skill => {
-              const relatedJobs = getRelatedJobs(skill.id, skill.name);
-              const hasRelatedJobs = relatedJobs.length > 0;
+      {/* Centered skills grid */}
+      <SkillsGrid
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {filteredSkills.map(skill => {
+          const relatedJobs = getRelatedJobs(skill.id, skill.name);
+          const hasRelatedJobs = relatedJobs.length > 0;
+          
+          return (
+            <SkillCard key={skill.id} variants={itemVariants}>
+              <SkillName>{skill.name}</SkillName>
+              <SkillCategory>{formatCategory(skill.category)}</SkillCategory>
               
-              return (
-                <SkillCard key={skill.id} variants={itemVariants}>
-                  <SkillName>{skill.name}</SkillName>
-                  <SkillCategory>{formatCategory(skill.category)}</SkillCategory>
-                  
-                  <ProficiencyBar>
-                    <ProficiencyFill width={skill.proficiency * 100} />
-                  </ProficiencyBar>
-                  
-                  <SkillDetail>
-                    {getExperienceYears(skill.yearStarted)}+ years of experience
-                  </SkillDetail>
-                  
-                  {skill.description && (
-                    <SkillDetail>{skill.description}</SkillDetail>
-                  )}
-                  
-                  {skill.relatedSkills && skill.relatedSkills.length > 0 && (
-                    <RelatedSkillsContainer>
-                      {skill.relatedSkills.map(relatedSkill => {
-                        // Only make clickable if this is a direct match to a job technology
-                        const isClickable = allJobTechnologies.some(tech => 
-                          tech.toLowerCase() === relatedSkill.toLowerCase()
-                        );
-                        
-                        return (
-                          <RelatedSkillTag 
-                            key={relatedSkill} 
-                            $isClickable={isClickable}
-                            onClick={() => isClickable && handleRelatedSkillClick(relatedSkill)}
-                          >
-                            {relatedSkill}
-                          </RelatedSkillTag>
-                        );
-                      })}
-                    </RelatedSkillsContainer>
-                  )}
-                  
-                  <JobsSection>
-                    {hasRelatedJobs ? (
-                      <JobsLabel>Used in {relatedJobs.length} job{relatedJobs.length !== 1 ? 's' : ''}</JobsLabel>
-                    ) : (
-                      <JobsLabel>View all experience</JobsLabel>
-                    )}
-                    <ViewExperiencesButton onClick={() => navigateToExperiences(skill.name, skill.id)}>
-                      View Experiences
-                    </ViewExperiencesButton>
-                  </JobsSection>
-                </SkillCard>
-              );
-            })}
-          </SkillsGrid>
-        </MainContent>
-        
-        {/* Sidebar - Category filters */}
-        <Sidebar>
-          <FilterSidebar>
-            <FilterTitle>Filter by Category</FilterTitle>
-            <FilterDescription>
-              View my skills grouped by category to better understand my expertise areas.
-            </FilterDescription>
-            
-            {categories.map(category => (
-              <FilterButton
-                key={category}
-                $active={selectedCategory === category || (category === 'All' && !selectedCategory)}
-                onClick={() => setSelectedCategory(category === 'All' ? null : category)}
-              >
-                {category === 'All' ? 'All Skills' : formatCategory(category)}
-              </FilterButton>
-            ))}
-          </FilterSidebar>
-        </Sidebar>
-      </ContentGrid>
+              <ProficiencyBar>
+                <ProficiencyFill width={skill.proficiency * 100} />
+              </ProficiencyBar>
+              
+              <SkillDetail>
+                {getExperienceYears(skill.yearStarted)}+ years of experience
+              </SkillDetail>
+              
+              {skill.description && (
+                <SkillDetail>{skill.description}</SkillDetail>
+              )}
+              
+              {skill.relatedSkills && skill.relatedSkills.length > 0 && (
+                <RelatedSkillsContainer>
+                  {skill.relatedSkills.map(relatedSkill => {
+                    // Only make clickable if this is a direct match to a job technology
+                    const isClickable = allJobTechnologies.some(tech => 
+                      tech.toLowerCase() === relatedSkill.toLowerCase()
+                    );
+                    
+                    return (
+                      <RelatedSkillTag 
+                        key={relatedSkill} 
+                        $isClickable={isClickable}
+                        onClick={() => isClickable && handleRelatedSkillClick(relatedSkill)}
+                      >
+                        {relatedSkill}
+                      </RelatedSkillTag>
+                    );
+                  })}
+                </RelatedSkillsContainer>
+              )}
+              
+              <JobsSection>
+                {hasRelatedJobs ? (
+                  <JobsLabel>Used in {relatedJobs.length} job{relatedJobs.length !== 1 ? 's' : ''}</JobsLabel>
+                ) : (
+                  <JobsLabel>View all experience</JobsLabel>
+                )}
+                <ViewExperiencesButton onClick={() => navigateToExperiences(skill.name, skill.id)}>
+                  View Experiences
+                </ViewExperiencesButton>
+              </JobsSection>
+            </SkillCard>
+          );
+        })}
+      </SkillsGrid>
     </SkillsContainer>
   );
 };

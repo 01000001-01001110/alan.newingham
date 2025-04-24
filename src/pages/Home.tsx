@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Timeline from '../components/organisms/Timeline';
 import jobs from '../data/jobs';
+import introParagraph from '../data/intro';
 
 const HomeContainer = styled.div`
   display: flex;
@@ -26,9 +27,10 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.p`
-  font-size: ${props => props.theme.fontSizes.xl};
-  max-width: 600px;
+  font-size: ${props => props.theme.fontSizes.lg};
+  max-width: 800px;
   margin: 0 auto ${props => props.theme.space.xl};
+  text-align: justify;
 `;
 
 const TimelineSection = styled.section`
@@ -49,13 +51,13 @@ const Home: React.FC = () => {
       <HeroSection>
         <Title>Alan Newingham</Title>
         <Subtitle>
-          Father, Platform Engineer, Cloud Migration Consultant with experience in Cloud, DevOps, and Full Stack Development
+          {introParagraph}
         </Subtitle>
-        <p>Welcome to a site about me, feel free to look around.</p>
       </HeroSection>
       
       <TimelineSection>
         <SectionTitle>Professional Journey</SectionTitle>
+        <p>Welcome to the site about me, feel free to interact below, or in the menu.</p>
         <Timeline jobs={jobs} />
       </TimelineSection>
     </HomeContainer>
