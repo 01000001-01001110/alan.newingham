@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -283,7 +283,8 @@ const TimelineComponent: React.FC<TimelineProps> = ({ jobs }) => {
   };
   
   // Generate the outline path for the animated stroke that traces the mountain silhouette
-  const generateOutlinePath = (): string => {
+  // Wrapped in useCallback to prevent recreation on each render
+  const generateOutlinePath = useCallback((): string => {
     // Get all triangles and sort them by x position (left to right)
     const trianglesByX = [...sortedByDuration].sort((a, b) => a.startX - b.startX);
     if (trianglesByX.length === 0) return '';
@@ -343,7 +344,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ jobs }) => {
     pathData += ` L ${leftEdge},${baseY}`;
 
     return pathData;
-  };
+  }, [sortedByDuration]);
   
   // Animation for the dash effect
   const [dashLength, setDashLength] = useState(0);
@@ -359,13 +360,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ jobs }) => {
       const perimeter = timelineWidth * 2; // rough estimate
       setDashLength(perimeter);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortedByDuration, timelineWidth, generateOutlinePath]);
-  
-  // Find the cloud migration engineer job for the special white line segment
-  const cloudMigrationJob = sortedByDuration.find(job => job.id === 'cloud-migration-engineer');
-  const cloudMigrationZIndex = cloudMigrationJob ? sortedByDuration.findIndex(job => job.id === 'cloud-migration-engineer') : -1;
-  // const cloudMigrationPath = cloudMigrationJob ? calculateTrianglePath(cloudMigrationJob, cloudMigrationZIndex) : '';
   
   return (
     <TimelineContainer>
